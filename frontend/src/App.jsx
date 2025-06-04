@@ -55,22 +55,8 @@ const App = () => {
           />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route
-            path="/successpayment"
-            element={
-              <PrivateRoute>
-                <SuccessPayment />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/errorpayment"
-            element={
-              <PrivateRoute>
-                <ErrorPayment />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/successpayment" element={<SuccessPayment />} />
+          <Route path="/errorpayment" element={<ErrorPayment />} />
         </Route>
       </Routes>
     </div>
