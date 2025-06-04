@@ -1,6 +1,22 @@
-import React from "react";
+import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
+import { NavLink, useNavigate } from "react-router";
 
 const UserDropdownComponent = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const firstLetter = user?.firstName?.charAt(0)?.toUpperCase() || "U";
+  const avatarUrl = `https://placehold.co/400x400?text=${firstLetter}`;
+
+  const handleLogout = () => {
+    logout(); 
+    toast.success("Cierre de Sesion Exitoso");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
+  };
+
   return (
     <div className="dropdown dropdown-end">
       <div
@@ -9,10 +25,7 @@ const UserDropdownComponent = () => {
         className="btn btn-ghost btn-circle avatar"
       >
         <div className="w-10 rounded-full">
-          <img
-            alt="User avatar"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-          />
+          <img alt="User avatar" src={avatarUrl} />
         </div>
       </div>
       <ul
@@ -20,18 +33,20 @@ const UserDropdownComponent = () => {
         className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <a className="justify-between text-base-content hover:text-primary">
+          <NavLink to='/profile' className="justify-between text-base-content hover:text-primary">
             Profile
-            <span className="badge badge-primary text-primary-content">
-              New
-            </span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a className="text-base-content hover:text-primary">Settings</a>
+          <NavLink to="/orders">Orders</NavLink>
         </li>
         <li>
-          <a className="text-base-content hover:text-primary">Logout</a>
+          <button
+            onClick={handleLogout}
+            className="text-base-content hover:text-primary"
+          >
+            Logout
+          </button>
         </li>
       </ul>
     </div>

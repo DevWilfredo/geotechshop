@@ -6,12 +6,12 @@ import ProductCatalogComponent from "../../components/ProductCatalogComponent";
 const Home = () => {
   
   return (
-    <>
+    <div className="animate-fade-in">
       <HeroComponent/>
       <LogoCarousel/>
       <CategoriesCarouselComponent/>
       <ProductCatalogComponent />
-    </>
+    </div>
   )
 };
 

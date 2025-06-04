@@ -1,6 +1,7 @@
 import { ShoppingCartIcon, X } from "lucide-react";
 import CartItemComponent from "../CartItemComponent";
 import { useCart } from "../../context/ShoppingCartContext";
+import { NavLink } from "react-router";
 
 const ShoppingCartComponent = () => {
   const {cartItems, calculateCartSubtotal} = useCart();
@@ -8,7 +9,6 @@ const ShoppingCartComponent = () => {
     <div className="drawer drawer-end z-50">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
-      {/* Botón del carrito */}
       <div className="drawer-content">
         <label
           htmlFor="my-drawer-4"
@@ -23,12 +23,12 @@ const ShoppingCartComponent = () => {
         </label>
       </div>
 
-      {/* Drawer lateral */}
+
       <div className="drawer-side">
         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
 
         <div className="w-[90vw] max-w-sm bg-base-100 h-full flex flex-col overflow-y-auto shadow-xl">
-          {/* Encabezado */}
+
           <div className="px-4 py-6 border-b border-base-300 flex justify-between items-center">
             <h2 className="text-lg font-medium text-base-content">
               Shopping Cart
@@ -38,17 +38,16 @@ const ShoppingCartComponent = () => {
             </label>
           </div>
 
-          {/* Productos */}
+
           <div className="flex-1 px-4 py-4">
             <ul className="divide-y divide-base-300">
-              {/* Aquí puedes mapear tus items */}
               {cartItems.map((item) => (
                 <CartItemComponent key={item.id} product={item} />
               ))}
             </ul>
           </div>
 
-          {/* Totales y botón de checkout */}
+
           <div className="border-t border-base-300 px-4 py-6">
             <div className="flex justify-between text-base font-medium text-base-content">
               <p>Subtotal</p>
@@ -58,12 +57,24 @@ const ShoppingCartComponent = () => {
               Shipping and taxes calculated at checkout.
             </p>
             <div className="mt-6">
-              <a
-                href="#"
-                className="btn btn-primary w-full text-primary-content"
+              <div
+                className={cartItems.length === 0 ? "tooltip w-full" : "w-full"}
+                data-tip={cartItems.length === 0 ? "Agrega productos al carrito para continuar" : ""}
               >
-                Checkout
-              </a>
+                <NavLink
+                  to='/order/overview'
+                  className="btn btn-primary w-full text-base-content"
+                  disabled={cartItems.length === 0}
+                  tabIndex={cartItems.length === 0 ? -1 : 0}
+                  onClick={() => {
+                    // Cierra el drawer al hacer checkout
+                    const drawer = document.getElementById("my-drawer-4");
+                    if (drawer) drawer.checked = false;
+                  }}
+                >
+                  Checkout
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>

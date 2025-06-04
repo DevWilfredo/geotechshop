@@ -5,16 +5,14 @@ const CartItemComponent = ({ product }) => {
 
   return (
     <li className="flex py-6 border-b border-base-300">
-      {/* Imagen del producto */}
       <div className="size-24 shrink-0 overflow-hidden rounded-md border border-base-300 bg-base-200">
         <img
-          src={product.image}
+          src={`${import.meta.env.VITE_BACKEND_API_URL}/uploads/${product.image}`}
           alt={`${product.image}-image`}
           className="size-full object-contain"
         />
       </div>
 
-      {/* Información del producto */}
       <div className="ml-4 flex flex-1 flex-col justify-between">
         <div className="flex justify-between text-base font-semibold text-base-content">
           <h3 className="line-clamp-1">{product.title}</h3>

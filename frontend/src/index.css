@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "@midudev/tailwind-animations";
 
 @tailwind utilities;
 
@@ -17,3 +18,4 @@
     animation: infinite-scroll 25s linear infinite;
   }
 }
+
