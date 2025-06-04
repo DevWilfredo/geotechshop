@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ColorSelectorComponent = ({ colors = [], onChange }) => {
   const [selected, setSelected] = useState(colors[0] || "");
@@ -30,5 +30,3 @@ const ColorSelectorComponent = ({ colors = [], onChange }) => {
 };
 
 export default ColorSelectorComponent;
-// This component is a color selector for a product details page.
-// It allows the user to select a color from a list of available colors.

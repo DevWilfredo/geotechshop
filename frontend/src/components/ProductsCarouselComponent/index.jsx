@@ -9,7 +9,7 @@ const chunkArray = (array, size) => {
 };
 
 const ProductCarouselComponent = ({ products }) => {
-    const productChunks = chunkArray(products, 3); // 3 productos por slide
+    const productChunks = chunkArray(products, 3);
 
     return (
         <div className="carousel w-full">

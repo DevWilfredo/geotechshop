@@ -1,22 +1,26 @@
 import { NavLink } from "react-router";
 import { useCart } from "../../context/ShoppingCartContext";
 import StarRatingComponent from "../StarRatingComponent";
+import toast from "react-hot-toast";
 
 const ProductCardComponent = ({ product }) => {
   const { addToCart } = useCart();
 
+  const handleAddToCart = () => {
+    addToCart(product);
+    toast.success(`${product.title} added to cart!`);
+  };
+
   return (
     <div className="relative flex flex-col my-6 bg-base-100 shadow-md border border-base-300 rounded-lg w-80 h-96 overflow-hidden">
-      {/* Imagen */}
       <div className="relative h-full overflow-hidden bg-clip-border">
         <img
-          src={product.image}
+          src={`${import.meta.env.VITE_BACKEND_API_URL}/uploads/${product.image}`}
           alt={product.title}
           className="w-full h-full p-5 object-contain"
         />
       </div>
 
-      {/* Contenido */}
       <div className="flex flex-col justify-between flex-grow p-4">
         <StarRatingComponent />
         <div>
@@ -33,16 +37,15 @@ const ProductCardComponent = ({ product }) => {
           </p>
         </div>
 
-        {/* Botones */}
         <div className="flex justify-around gap-3 mt-4">
           <button
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
             className="btn btn-primary text-primary-content"
           >
-            Agregar al carrito
+            Add to cart
           </button>
           <NavLink to={`/product/${product.id}/details`} className="btn btn-outline">
-            Detalles
+            Details
           </NavLink>
         </div>
       </div>

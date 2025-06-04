@@ -31,5 +31,3 @@ const BreadCrumbComponent = ({ title }) => {
 };
 
 export default BreadCrumbComponent;
-// This component is a breadcrumb navigation for a product details page.
-// It shows the current product category and its details.

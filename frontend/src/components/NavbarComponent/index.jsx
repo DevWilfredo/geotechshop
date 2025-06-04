@@ -1,40 +1,32 @@
-import MenuLinkComponent from "../MenuLinkComponent";
+import { Link } from "react-router";
+
 import ShoppingCartComponent from "../ShoppingCartComponent";
 import ThemeTogglerComponent from "../ThemeTogglerComponent";
 import UserDropdownComponent from "../UserDropdownComponent";
-
-const navbarMenuItems = [
-  { link: "/", title: "Home" },
-  { link: "/categories", title: "Categories" },
-  { link: "/about", title: "About" },
-  { link: "/contact", title: "Contact" },
-];
+import { useAuth } from "../../context/AuthContext";
 
 const NavbarComponent = () => {
-  return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="navbar-start">
-        <a className="btn btn-ghost text-xl text-primary">GeotechShop</a>
-      </div>
+  const { user } = useAuth();
 
-      <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navbarMenuItems.map((item, index) => (
-            <MenuLinkComponent key={index} link={item.link} text={item.title} />
-          ))}
-        </ul>
+  return (
+    <div className="navbar bg-base-100 shadow-sm fixed top-0 z-50">
+      <div className="navbar-start">
+        <Link to="/" className="btn btn-ghost text-xl text-primary">
+          GeotechShop
+        </Link>
       </div>
 
       <div className="navbar-end gap-7">
-        <div className="flex">
-          {/*Theme Toggler Button*/}
+        <div className="flex items-center gap-4">
           <ThemeTogglerComponent />
-
-          {/* Cart Dropdown */}
           <ShoppingCartComponent />
-
-          {/* Avatar Dropdown */}
-          <UserDropdownComponent />
+          {user ? (
+            <UserDropdownComponent />
+          ) : (
+            <Link to="/login" className="btn btn-sm btn-primary">
+              Iniciar Sesión
+            </Link>
+          )}
         </div>
       </div>
     </div>
